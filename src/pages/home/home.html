@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--Hello, {{ name }}
+  <ion-input [(ngModel)]="name"></ion-input>
+  <button ion-button type="button" (click)="showName()">Show name</button>-->
+  <ion-list no-lines>
+    <ion-header>Users</ion-header>
+    <button ion-item *ngFor="let user of users" (click)="itemSelected(user.name)">
+      {{ user.name }}
+      <p>{{ user.email }}</p>
+    </button> 
+  </ion-list>
+  <ion-list no-lines>
+    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+      {{ item }}
+    </button> 
+  </ion-list>
+</ion-content>
