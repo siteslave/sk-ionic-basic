@@ -10,7 +10,7 @@
   <button ion-button type="button" (click)="showName()">Show name</button>-->
   <ion-list no-lines>
     <ion-header>Users</ion-header>
-    <button ion-item *ngFor="let user of users" (click)="itemSelected(user.name)">
+    <button ion-item *ngFor="let user of users" (click)="itemSelected(user)">
       {{ user.name }}
       <p>{{ user.email }}</p>
     </button> 

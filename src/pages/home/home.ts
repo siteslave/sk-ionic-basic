@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import {DetailPage} from '../detail/detail';
+
 @Component({
   selector: 'page-home', // <page-home></page-home>
   templateUrl: 'home.html'
@@ -21,8 +23,9 @@ export class HomePage {
     ]
   }
 
-  itemSelected(item) {
-    alert(item);
+  itemSelected(user) {
+    this.navCtrl.push(DetailPage, user);
+    // this.navCtrl.push(DetailPage, { name: xxx, id: 123 });
   }
 
 }
