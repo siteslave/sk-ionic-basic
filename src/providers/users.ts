@@ -65,4 +65,17 @@ export class Users {
     });
   }
 
+  removeUser(id: number) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${this.url}/users/${id}`)
+      //this.http.get(this.url + '/users/' + id)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data)
+        }, err => {
+          reject(err)
+        });
+    });
+  }
+
 }

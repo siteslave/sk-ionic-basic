@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 
-import { NavController, LoadingController } from 'ionic-angular';
+import {
+  NavController,
+  LoadingController,
+  ActionSheetController,
+  Platform,
+  AlertController
+} from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
 import { AddPage } from '../add/add';
@@ -20,13 +26,16 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private userProvider: Users,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private actionSheetCtrl: ActionSheetController,
+    private platform: Platform,
+    private alertCtrl: AlertController
   ) {
     this.name = 'Ionic';
     this.items = ['Apple', 'Banana', 'Orange'];
   }
 
-  ionViewWillEnter() {
+  getUsers() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -34,7 +43,7 @@ export class HomePage {
     loading.present();
 
     this.userProvider.getUsers()
-      .then((data: IHttpResult) => { 
+      .then((data: IHttpResult) => {
         if (data.ok) {
           this.users = data.rows;
         }
@@ -42,7 +51,11 @@ export class HomePage {
       }, (err) => {
         loading.dismiss();
         console.error(err);
-       });
+      });
+  }  
+
+  ionViewWillEnter() {
+    this.getUsers();
   }
 
   itemSelected(id: number) {
@@ -52,6 +65,61 @@ export class HomePage {
 
   goAddPage() {
     this.navCtrl.push(AddPage);
+  }
+
+  showConfirm(id: number) {
+    let confirm = this.alertCtrl.create({
+      title: 'Are you sure?',
+      message: 'คุณต้องการลบรายการนี้ ใช่หรือไม่?',
+      buttons: [
+        {
+          text: 'ไม่ใช่',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'ใช่',
+          handler: () => {
+            this.userProvider.removeUser(id)
+              .then((data: IHttpResult) => {
+                this.getUsers();
+              }, (err) => {
+              
+              });
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }  
+
+  presentActionSheet(id: number) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Modify your album',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            this.showConfirm(id);
+          }
+        },{
+          text: 'Detail',
+          handler: () => {
+            this.navCtrl.push(DetailPage, {id: id});
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }
