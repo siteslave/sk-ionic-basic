@@ -10,4 +10,5 @@ export interface IUser {
 export interface IHttpResult {
   ok: boolean;
   rows?: any;
+  user?: any;
 }

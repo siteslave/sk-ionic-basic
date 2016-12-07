@@ -11,7 +11,19 @@ export class Users {
 
   getUsers() {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/users')
+      this.http.get('http://192.168.3.181:3000/users')
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data)
+        }, err => {
+          reject(err)
+        });
+    });
+  }
+
+  getDetail(id: number) {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://192.168.3.181:3000/users/' + id)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data)

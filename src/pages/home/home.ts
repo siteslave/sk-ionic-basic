@@ -43,8 +43,8 @@ export class HomePage {
        });
   }
 
-  itemSelected(user) {
-    this.navCtrl.push(DetailPage, user);
+  itemSelected(id: number) {
+    this.navCtrl.push(DetailPage, {id: id});
     // this.navCtrl.push(DetailPage, { name: xxx, id: 123 });
   }
 

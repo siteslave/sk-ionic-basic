@@ -1,37 +1,47 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-
+import { Users } from '../../providers/users';
+import { IUser, IHttpResult } from '../../models';
 
 @Component({
   selector: 'page-detail',
   templateUrl: 'detail.html'
 })
 export class DetailPage {
-  name: string;
+  username: string;
   email: string;
+  name: string;
+  id: number;
 
   constructor(
     public navCtrl: NavController,
     private navParams: NavParams,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private userProvider: Users
   ) {
-    this.name = this.navParams.get('name');
-    this.email = this.navParams.get('email');
+    this.id = this.navParams.get('id');
   }
 
   ionViewWillEnter() {
-
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
 
-  loading.present();
+    loading.present();
 
-  setTimeout(() => {
-    loading.dismiss();
-  }, 5000);
-
-    console.log('Hello DetailPage Page');
+    this.userProvider.getDetail(this.id)
+      .then((data: IHttpResult) => { 
+        if (data.ok) {
+          let user = <IUser>data.user;
+          this.username = user.username;
+          this.email = user.email;
+          this.name = user.name;
+        }
+        loading.dismiss();
+      }, (err) => {
+        loading.dismiss();
+        console.error(err);
+       });
   }
 
 }
