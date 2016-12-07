@@ -1,0 +1,39 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Add</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <ion-label>Groups</ion-label>
+    <ion-select [(ngModel)]="group_id">
+      <ion-option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  </ion-list>
+
+  <button ion-button block (click)="save()">Save</button>
+</ion-content>

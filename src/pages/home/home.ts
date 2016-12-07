@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 
 import { NavController, LoadingController } from 'ionic-angular';
 
-import {DetailPage} from '../detail/detail';
+import { DetailPage } from '../detail/detail';
+import { AddPage } from '../add/add';
+
 import { Users } from '../../providers/users';
 import { IUser, IHttpResult } from '../../models';
 
@@ -46,6 +48,10 @@ export class HomePage {
   itemSelected(id: number) {
     this.navCtrl.push(DetailPage, {id: id});
     // this.navCtrl.push(DetailPage, { name: xxx, id: 123 });
+  }
+
+  goAddPage() {
+    this.navCtrl.push(AddPage);
   }
 
 }

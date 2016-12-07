@@ -8,6 +8,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { SettingPage } from '../pages/setting/setting';
 import { DetailPage } from '../pages/detail/detail';
+import { AddPage } from '../pages/add/add';
+
 import { Users } from '../providers/users';
 
 @NgModule({
@@ -18,7 +20,8 @@ import { Users } from '../providers/users';
     HomePage,
     TabsPage,
     SettingPage,
-    DetailPage
+    DetailPage,
+    AddPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -31,11 +34,12 @@ import { Users } from '../providers/users';
     HomePage,
     TabsPage,
     SettingPage, 
-    DetailPage
+    DetailPage,
+    AddPage
   ],
   providers: [
     Users,
-    { provide: 'API_URL', useValue: 'http://192.168.3.181:3000'},
+    { provide: 'API_URL', useValue: 'http://192.168.3.186:3000'},
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

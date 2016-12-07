@@ -7,8 +7,14 @@ export interface IUser {
   group_name: string;
 }
 
+export interface IGroup {
+    id: string;
+    name: string;
+}
+
 export interface IHttpResult {
   ok: boolean;
   rows?: any;
   user?: any;
+  groups?: any;
 }
