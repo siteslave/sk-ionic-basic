@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { SettingPage } from '../pages/setting/setting';
 import { DetailPage } from '../pages/detail/detail';
+import { Users } from '../providers/users';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { DetailPage } from '../pages/detail/detail';
     SettingPage, 
     DetailPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    Users,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule {}

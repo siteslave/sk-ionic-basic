@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 import {DetailPage} from '../detail/detail';
+import { Users } from '../../providers/users';
+import { IUser, IHttpResult } from '../../models';
 
 @Component({
   selector: 'page-home', // <page-home></page-home>
@@ -11,16 +13,34 @@ import {DetailPage} from '../detail/detail';
 export class HomePage {
   name: string;
   items: Array<string>; // ['a', 'b', 'c']
-  users: Array<{ id: number, name: string, email: string }>;
-  // [{id: 1, name: 'xxx', email: 'xx@gmail.com'}]
+  users: Array<IUser>;
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    private userProvider: Users,
+    private loadingCtrl: LoadingController
+  ) {
     this.name = 'Ionic';
     this.items = ['Apple', 'Banana', 'Orange'];
-    this.users = [
-      { id: 1, name: 'Bill Gate', email: 'bill@gmail.com' },
-      { id: 2, name: 'John Doe', email: 'john@gmail.com' },
-    ]
+  }
+
+  ionViewWillEnter() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
+
+    this.userProvider.getUsers()
+      .then((data: IHttpResult) => { 
+        if (data.ok) {
+          this.users = data.rows;
+        }
+        loading.dismiss();
+      }, (err) => {
+        loading.dismiss();
+        console.error(err);
+       });
   }
 
   itemSelected(user) {

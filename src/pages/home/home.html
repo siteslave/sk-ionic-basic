@@ -9,15 +9,11 @@
   <ion-input [(ngModel)]="name"></ion-input>
   <button ion-button type="button" (click)="showName()">Show name</button>-->
   <ion-list no-lines>
-    <ion-header>Users</ion-header>
+    <ion-list-header>Users</ion-list-header>
     <button ion-item *ngFor="let user of users" (click)="itemSelected(user)">
       {{ user.name }}
       <p>{{ user.email }}</p>
-    </button> 
-  </ion-list>
-  <ion-list no-lines>
-    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-      {{ item }}
+      <p>{{ user.group_name }}</p>
     </button> 
   </ion-list>
 </ion-content>
