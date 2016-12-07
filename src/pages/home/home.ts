@@ -54,6 +54,19 @@ export class HomePage {
       });
   }  
 
+  doRefresh(refresher) {
+    this.userProvider.getUsers()
+      .then((data: IHttpResult) => {
+        if (data.ok) {
+          this.users = data.rows;
+        }
+        refresher.complete();
+      }, (err) => {
+        refresher.complete();
+        console.error(err);
+      });
+  }
+
   ionViewWillEnter() {
     this.getUsers();
   }
