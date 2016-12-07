@@ -35,6 +35,8 @@ import { Users } from '../providers/users';
   ],
   providers: [
     Users,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }]
+    { provide: 'API_URL', useValue: 'http://192.168.3.181:3000'},
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
+  ]
 })
 export class AppModule {}

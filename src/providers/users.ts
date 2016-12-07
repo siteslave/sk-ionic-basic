@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Users {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, @Inject('API_URL') private url: string) {
     console.log('Hello Users Provider');
   }
 
   getUsers() {
     return new Promise((resolve, reject) => {
-      this.http.get('http://192.168.3.181:3000/users')
+      this.http.get(`${this.url}/users`)
+      // this.http.get(this.url + '/users')
         .map(res => res.json())
         .subscribe(data => {
           resolve(data)
@@ -23,7 +24,8 @@ export class Users {
 
   getDetail(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://192.168.3.181:3000/users/' + id)
+      this.http.get(`${this.url}/users/${id}`)
+      //this.http.get(this.url + '/users/' + id)
         .map(res => res.json())
         .subscribe(data => {
           resolve(data)
