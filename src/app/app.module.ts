@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SettingPage } from '../pages/setting/setting';
 import { DetailPage } from '../pages/detail/detail';
 import { AddPage } from '../pages/add/add';
+import { LoginPage } from '../pages/login/login';
 
 import { Users } from '../providers/users';
 
@@ -21,7 +22,8 @@ import { Users } from '../providers/users';
     TabsPage,
     SettingPage,
     DetailPage,
-    AddPage
+    AddPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,11 +37,12 @@ import { Users } from '../providers/users';
     TabsPage,
     SettingPage, 
     DetailPage,
-    AddPage
+    AddPage,
+    LoginPage
   ],
   providers: [
     Users,
-    { provide: 'API_URL', useValue: 'http://192.168.3.186:3000'},
+    { provide: 'API_URL', useValue: 'http://192.168.3.181:3000'},
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

@@ -16,5 +16,7 @@ export interface IHttpResult {
   ok: boolean;
   rows?: any;
   user?: any;
+  msg?: any;
   groups?: any;
+  fullname?: string;
 }

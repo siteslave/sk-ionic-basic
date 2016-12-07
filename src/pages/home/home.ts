@@ -10,6 +10,7 @@ import {
 
 import { DetailPage } from '../detail/detail';
 import { AddPage } from '../add/add';
+import { LoginPage } from '../login/login';
 
 import { Users } from '../../providers/users';
 import { IUser, IHttpResult } from '../../models';
@@ -133,6 +134,11 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  logout() {
+    localStorage.removeItem('fullname');
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
